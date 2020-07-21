@@ -1,0 +1,74 @@
+A computational item is a value used in arithmetic operations. It must be numeric. If a group item is described with a computational usage, the elementary items
+within the group have that usage. The maximum length of a computational item is 18 decimal digits, except for a PACKED-DECIMAL item. If the ARITH(COMPAT) 
+compiler option is in effect, then the maximum length of a PACKED-DECIMAL item is 18 decimal digits. If the ARITH(EXTEND) compiler option is in effect, 
+then the maximum length of a PACKED-DECIMAL item is 31 decimal digits.
+
+The PICTURE of a computational item can contain only:
+
+  9    One or more numeric character positions
+  S    One operational sign
+  V    One implied decimal point
+  P    One or more decimal scaling positions
+
+COMPUTATIONAL-1 and COMPUTATIONAL-2 items (internal floating-point) cannot have PICTURE strings.
+
+BINARY
+Specified for binary data items. Such items have a decimal equivalent consisting of the decimal digits 0 through 9, plus a sign. 
+Negative numbers are represented as the two's complement of the positive number with the same absolute value.
+The amount of storage occupied by a binary item depends on the number of decimal digits defined in its PICTURE clause:
+
+    Digits in PICTURE clause 	|  Storage occupied
+    --------------------------+-----------------------
+    1 through 4               |  2 bytes (halfword)
+    5 through 9               |  4 bytes (fullword)
+    10 through 18             |  8 bytes (doubleword)
+
+Binary data is big-endian: the operational sign is contained in the leftmost bit.
+
+BINARY, COMPUTATIONAL, and COMPUTATIONAL-4 data items can be affected by the TRUNC compiler option. For information about the effect of this compiler option, 
+see TRUNC in the Enterprise COBOL Programming Guide.
+
+PACKED-DECIMAL
+    Specified for internal decimal items. Such an item appears in storage in packed decimal format. There are two digits for each character position, except for the trailing character position, which is occupied by the low-order digit and the sign. Such an item can contain any of the digits 0 through 9, plus a sign, representing a value not exceeding 18 decimal digits.
+    The sign representation uses the same bit configuration as the 4-bit sign representation in zoned decimal fields. For details, see Sign representation of zoned and packed-decimal data in the Enterprise COBOL Programming Guide.
+
+COMP (binary)
+    This is the equivalent of BINARY. The COMPUTATIONAL phrase is synonymous with BINARY.
+
+COMP-1 (floating-point)
+    Specified for internal floating-point items (single precision). COMP-1 items are 4 bytes long. 
+
+COMP-2 (long floating-point)
+    Specified for internal floating-point items (double precision). COMP-2 items are 8 bytes long. 
+
+COMP-3 (internal decimal)
+    This is the equivalent of PACKED-DECIMAL.
+
+COMP-4 (binary)
+    This is the equivalent of BINARY.
+
+COMP-5 (native binary)
+    These data items are represented in storage as binary data. The data items can contain values up to the capacity of the native binary representation 
+    (2, 4, or 8 bytes), rather than being limited to the value implied by the number of nines in the picture for the item (as is the case for USAGE BINARY data). 
+    When numeric data is moved or stored into a COMP-5 item, truncation occurs at the binary field size rather than at the COBOL picture size limit. 
+    When a COMP-5 item is referenced, the full binary field size is used in the operation.
+
+The TRUNC(BIN) compiler option causes all binary data items (USAGE BINARY, COMP, COMP-4) to be handled as if they were declared USAGE COMP-5.
+
+The following table shows several picture character strings, the resulting storage representation, and the range of values for data items described with USAGE COMP-5.
+
+    Picture 	            | Storage representation 	     | Numeric values
+    ----------------------+------------------------------+--------------------------------------------------------------
+    S9(1) through S9(4) 	| Binary halfword (2 bytes)    | -32768 through +32767
+    S9(5) through S9(9) 	| Binary fullword (4 bytes)    | -2,147,483,648 through +2,147,483,647
+    S9(10) through S9(18) |	Binary doubleword (8 bytes)  | -9,223,372,036,854,775,808 through +9,223,372,036,854,775,807
+    9(1) through 9(4) 	  | Binary halfword (2 bytes) 	 |  0 through 65535
+    9(5) through 9(9) 	  | Binary fullword (4 bytes) 	 |  0 through 4,294,967,295
+    9(10) through 9(18) 	| Binary doubleword (8 bytes)  |  0 through 18,446,744,073,709,551,615
+
+The picture for a COMP-5 data item can specify a scaling factor (that is, decimal positions or implied integer positions). 
+In this case, the maximal capacities listed in the table above must be scaled appropriately. 
+For example, a data item described with PICTURE S99V99 COMP-5 is represented in storage as a binary halfword, and supports a range of values from -327.68 to +327.67.
+
+USAGE NOTE: When the ON SIZE ERROR phrase is used on an arithmetic statement and a receiver is defined with USAGE COMP-5, the maximum value that the receiver can contain is the value implied by the item's decimal PICTURE character-string. Any attempt to store a value larger than this maximum will result in a size error condition.
+
