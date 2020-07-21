@@ -1,0 +1,65 @@
+*>Copyright (c) 2019 NTT DATA, Inc. All rights reserved.
+*>compiler version:  5.1.26764
+*>source file name:  FLIP4BCP.cbl
+*>date generated  :  Wed Mar 25 11:49:21 EDT 2020
+*>compiler options:  -d64 -cv -dcmi -apost -dz -Ona -align=8 -ld -pi -dv=0 -ef -cod1 -cirp2 -chnc -di -pt2 -cm -cax -chnm -rw=SWITCH -cpanv
+*>source encoding :  UTF-8
+*>target encoding :  ISO-8859-1
+IDENTIFICATION DIVISION.                                         
+PROGRAM-ID. FLIP4BCP.                                            
+AUTHOR.     DELL.                                                
+*>*************************************************************    
+*> DISPLAY AND SET RETURN CODE                                *    
+*>*************************************************************    
+DATA DIVISION.                                                   
+WORKING-STORAGE SECTION.                                         
+01 WS-DATA.                                                      
+    05  WS-4BYTE-COMP PIC S9(08) COMP.                           
+    05  WS-4BYTE-COMP-REDEF   REDEFINES                          
+        WS-4BYTE-COMP PIC  X(04).                                
+                                                                 
+LINKAGE SECTION.                                                 
+01 LS-DATA.                                                      
+    05  WS-4BYTE-COMP5 PIC S9(08) COMP  .                        
+    05  WS-4BYTE-COMP5-REDEF   REDEFINES                         
+        WS-4BYTE-COMP5 PIC  X(04).                               
+                                                                 
+PROCEDURE DIVISION USING LS-DATA.                                
+MAIN-CONTROL SECTION.                                            
+                                                                 
+    MOVE WS-4BYTE-COMP5      TO WS-4BYTE-COMP.                   
+    MOVE WS-4BYTE-COMP-REDEF TO WS-4BYTE-COMP5-REDEF.            
+                                                                 
+    GOBACK.                                                      
+MAIN-CONTROL-EXIT. EXIT.                                         
+*> ------------------------------------------------------------------------------------------------------------------
+*> The source line number references in the following sections are either of
+*> the form <line-number> or <file-number>:<line-number>. The first form is
+*> used as an abbreviation for 0:<line-number>.
+*> The following is a key allowing the determination of the file name from
+*> the <file-number>.
+*>  
+*>          0: FLIP4BCP.cbl
+*>  
+*> ------------------------------------------------------------------------------------------------------------------
+*> DATA MAP KEY
+*>               Sec(Section) Fil = File Section                Type Flags: column O    ---> O = Occurs Item
+*>                            Wor = Working-Storage Section                 column R    ---> R = Redefines
+*>                            Loc = Local-Storage Section                   column X/G  ---> X = External
+*>                            Rep = Report Section                                           G = Global
+*>                            Lin = Linkage Section                         
+*> ------------------------------------------------------------------------------------------------------------------
+*> Data map for Program-Id: FLIP4BCP
+*> ------------------------------------------------------------------------------------------------------------------
+*>     Line    Name                                                  Size Offset      Sec Flags Data Type
+*>                                                                                        O R X
+*>                                                                                            G
+*> ------------------------------------------------------------------------------------------------------------------
+*>        9 01 WS-DATA                                                  4             Wor       Group
+*>       10   05 WS-4BYTE-COMP                                          4 (000000000)       R   Binary
+*>       11   05 WS-4BYTE-COMP-REDEF                                    4 (000000000)           Display
+*>       15 01 LS-DATA                                                  4             Lin       Group
+*>       16   05 WS-4BYTE-COMP5                                         4 (000000000)       R   Binary
+*>       17   05 WS-4BYTE-COMP5-REDEF                                   4 (000000000)           Display
+*> ------------------------------------------------------------------------------------------------------------------
+*> --I: #14 Compiling FLIP4BCP.cbl
