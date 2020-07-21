@@ -1,0 +1,91 @@
+*>Copyright (c) 2019 NTT DATA, Inc. All rights reserved.
+*>compiler version:  5.1.26764
+*>source file name:  TEST10.cbl
+*>date generated  :  Wed Mar 25 11:49:19 EDT 2020
+*>compiler options:  -d64 -cv -dcmi -apost -dz -Ona -align=8 -ld -pi -dv=0 -ef -cod1 -cirp2 -chnc -di -pt2 -cm -cax -chnm -rw=SWITCH -cpanv
+*>source encoding :  UTF-8
+*>target encoding :  ISO-8859-1
+IDENTIFICATION DIVISION.                                         
+PROGRAM-ID.    TEST10.                                           
+AUTHOR.        CICERO.                                           
+DATE-WRITTEN.  08/09/2016.                                       
+DATE-COMPILED. 08/09/2016.                                       
+                                                                 
+ENVIRONMENT DIVISION.                                            
+                                                                 
+CONFIGURATION SECTION.                                           
+                                                                 
+INPUT-OUTPUT SECTION.                                            
+                                                                 
+FILE-CONTROL.                                                    
+                                                                 
+DATA DIVISION.                                                   
+                                                                 
+FILE SECTION.                                                    
+                                                                 
+WORKING-STORAGE SECTION.                                         
+                                                                 
+01  FINAL-COMP      PIC S9(4) COMP.                              
+01  FINAL-COMP-X    REDEFINES FINAL-COMP PIC X(2).               
+                                                                 
+01  FINAL3          PIC S9(5) COMP-3 VALUE ZEROES.               
+01  FINAL3-X        REDEFINES FINAL3 PIC X(3).                   
+                                                                 
+                                                                 
+01  FINAL5          PIC S9(4) COMP-5.                            
+01  FINAL5-X        REDEFINES FINAL5 PIC X(2).                   
+                                                                 
+PROCEDURE DIVISION.                                              
+                                                                 
+0000-MAIN.                                                       
+                                                                 
+    DISPLAY 'Hello World!'.                                      
+    MOVE X'0708' to FINAL5-X.                                    
+                                                                 
+*>**************************************************************   
+*>   CODE TO CONVERT COMP-5 BIG ENDIAN to COMP-3 LITTLE ENDIAN *   
+*>**************************************************************   
+*>                                                             *   
+    MOVE FINAL5-X to FINAL-COMP-X.                               
+    CALL 'FLIP2BCP' USING FINAL-COMP-X.                          
+    MOVE FINAL-COMP TO FINAL3.                                   
+*>                                                             *   
+*>**************************************************************   
+                                                                 
+    DISPLAY "COMP-3:" FINAL3.                                    
+    DISPLAY 'Bye World!'.                                        
+                                                                 
+    STOP RUN.                                                    
+                                                                 
+                                                                 
+*> ------------------------------------------------------------------------------------------------------------------
+*> The source line number references in the following sections are either of
+*> the form <line-number> or <file-number>:<line-number>. The first form is
+*> used as an abbreviation for 0:<line-number>.
+*> The following is a key allowing the determination of the file name from
+*> the <file-number>.
+*>  
+*>          0: TEST10.cbl
+*>  
+*> ------------------------------------------------------------------------------------------------------------------
+*> DATA MAP KEY
+*>               Sec(Section) Fil = File Section                Type Flags: column O    ---> O = Occurs Item
+*>                            Wor = Working-Storage Section                 column R    ---> R = Redefines
+*>                            Loc = Local-Storage Section                   column X/G  ---> X = External
+*>                            Rep = Report Section                                           G = Global
+*>                            Lin = Linkage Section                         
+*> ------------------------------------------------------------------------------------------------------------------
+*> Data map for Program-Id: TEST10
+*> ------------------------------------------------------------------------------------------------------------------
+*>     Line    Name                                                  Size Offset      Sec Flags Data Type
+*>                                                                                        O R X
+*>                                                                                            G
+*> ------------------------------------------------------------------------------------------------------------------
+*>       21 01 FINAL-COMP                                               2             Wor   R   Binary
+*>       22 01 FINAL-COMP-X                                             2             Wor       Display
+*>       24 01 FINAL3                                                   3             Wor   R   Packed Decimal
+*>       25 01 FINAL3-X                                                 3             Wor       Display
+*>       28 01 FINAL5                                                   2             Wor   R   Native Binary
+*>       29 01 FINAL5-X                                                 2             Wor       Display
+*> ------------------------------------------------------------------------------------------------------------------
+*> --I: #14 Compiling TEST10.cbl
