@@ -1,0 +1,104 @@
+*>Copyright (c) 2019 NTT DATA, Inc. All rights reserved.
+*>compiler version:  5.1.26764
+*>source file name:  TEST08.cbl
+*>date generated  :  Wed Feb 19 18:31:53 EST 2020
+*>compiler options:  -d64 -cv -dcmi -apost -dz -Ona -align=8 -ld -pi -dv=0 -ef -cod1 -cirp2 -chnc -di -pt2 -cm -cax -chnm -rw=SWITCH -cpanv
+*>source encoding :  UTF-8
+*>target encoding :  ISO-8859-1
+IDENTIFICATION DIVISION.                                         
+PROGRAM-ID. TEST08.                                              
+                                                                 
+ENVIRONMENT DIVISION.                                            
+                                                                 
+INPUT-OUTPUT SECTION.                                            
+FILE-CONTROL.                                                    
+    SELECT DATA-FILE                                             
+      ASSIGN TO DATFILE                                          
+      ORGANIZATION IS LINE                                       
+      FILE STATUS IS DATA-FILE-STATUS.                           
+                                                                 
+DATA DIVISION.                                                   
+FILE SECTION.                                                    
+FD DATA-FILE                                                     
+    BLOCK CONTAINS 0 RECORDS                                     
+    RECORD CONTAINS 80 CHARACTERS                                
+    RECORDING MODE IS F                                          
+    LABEL RECORDS ARE STANDARD                                   
+    DATA RECORD IS OUTPUT-RECORD.                                
+                                                                 
+01 OUTPUT-RECORD        PIC X(80).                               
+                                                                 
+WORKING-STORAGE SECTION.                                         
+                                                                 
+77 DATA-FILE-STATUS        PIC XX VALUE "00".                    
+   88 EOF-OUT                     VALUE "10".                    
+                                                                 
+01 TEMP-REC                PIC X(80) VALUE SPACES.               
+01 TMP-REC REDEFINES TEMP-REC.                                   
+   03  FILLER              PIC X(15).                            
+   03  NUMB                PIC ZZ9.                              
+   03  FILLER              PIC X(62).                            
+                                                                 
+01 WS-NUM                  PIC 9(3) VALUE 43.                    
+01 WS-EOF                  PIC X VALUE 'N'.                      
+                                                                 
+                                                                 
+PROCEDURE DIVISION.                                              
+                                                                 
+OPEN-DATA.                                                       
+   OPEN I-O DATA-FILE.                                           
+                                                                 
+   DISPLAY "DATA-FILE-SATUS: " DATA-FILE-STATUS                  
+                                                                 
+   READ DATA-FILE INTO TEMP-REC                                  
+                                                                 
+   DISPLAY "DATA-FILE-SATUS READ 1: " DATA-FILE-STATUS           
+   DISPLAY "BEFORE:" TEMP-REC                                    
+   MOVE WS-NUM TO NUMB                                           
+   DISPLAY "AFTER:" TEMP-REC                                     
+                                                                 
+   REWRITE OUTPUT-RECORD FROM TEMP-REC                           
+   DISPLAY "DATA-FILE-SATUS REWRITE: " DATA-FILE-STATUS          
+                                                                 
+   READ DATA-FILE                                                
+      AT END MOVE 'Y' TO WS-EOF                                  
+   END-READ                                                      
+                                                                 
+   CLOSE DATA-FILE                                               
+                                                                 
+  GOBACK.                                                        
+*> ------------------------------------------------------------------------------------------------------------------
+*> The source line number references in the following sections are either of
+*> the form <line-number> or <file-number>:<line-number>. The first form is
+*> used as an abbreviation for 0:<line-number>.
+*> The following is a key allowing the determination of the file name from
+*> the <file-number>.
+*>  
+*>          0: TEST08.cbl
+*>  
+*> ------------------------------------------------------------------------------------------------------------------
+*> DATA MAP KEY
+*>               Sec(Section) Fil = File Section                Type Flags: column O    ---> O = Occurs Item
+*>                            Wor = Working-Storage Section                 column R    ---> R = Redefines
+*>                            Loc = Local-Storage Section                   column X/G  ---> X = External
+*>                            Rep = Report Section                                           G = Global
+*>                            Lin = Linkage Section                         
+*> ------------------------------------------------------------------------------------------------------------------
+*> Data map for Program-Id: TEST08
+*> ------------------------------------------------------------------------------------------------------------------
+*>     Line    Name                                                  Size Offset      Sec Flags Data Type
+*>                                                                                        O R X
+*>                                                                                            G
+*> ------------------------------------------------------------------------------------------------------------------
+*>       22 01 OUTPUT-RECORD                                           80             Fil       Display
+*>       26 77 DATA-FILE-STATUS                                         2             Wor       Display
+*>       27   88 EOF-OUT                                                                        
+*>       29 01 TEMP-REC                                                80             Wor   R   Display
+*>       30 01 TMP-REC                                                 80             Wor       Group
+*>       31   03 FILLER                                                15 (000000000)           Display
+*>       32   03 NUMB                                                   3 (000000015)           Display Numeric Edit
+*>       33   03 FILLER                                                62 (000000018)           Display
+*>       35 01 WS-NUM                                                   3             Wor       Display Numeric
+*>       36 01 WS-EOF                                                   1             Wor       Display
+*> ------------------------------------------------------------------------------------------------------------------
+*> --I: #14 Compiling TEST08.cbl
