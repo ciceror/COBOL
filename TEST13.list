@@ -1,0 +1,130 @@
+*>Copyright (c) 2016-2020 NTT DATA, Inc. All rights reserved.
+*>compiler version:  5.2.27677
+*>source file name:  TEST13.cbl
+*>date generated  :  Tue Jul 21 15:52:05 EDT 2020
+*>compiler options:  -d64 -cv -dcmi -ld -pt2 -cax -dv=0 -ef
+*>source encoding :  UTF-8
+*>target encoding :  ISO-8859-1
+IDENTIFICATION DIVISION.                                         
+PROGRAM-ID. TEST13.                                              
+AUTHOR. CICERO.                                                  
+                                                                 
+ENVIRONMENT DIVISION.                                            
+INPUT-OUTPUT SECTION.                                            
+FILE-CONTROL.                                                    
+       SELECT REPORT01 ASSIGN TO REPORT01                        
+              ORGANIZATION IS LINE SEQUENTIAL.                   
+                                                                 
+DATA DIVISION.                                                   
+FILE SECTION.                                                    
+FD REPORT01                                                      
+   BLOCK CONTAINS 0 RECORDS                                      
+   RECORD CONTAINS 132 CHARACTERS.                               
+01 PRINT-LINE                   PIC X(132).                      
+                                                                 
+WORKING-STORAGE SECTION.                                         
+                                                                 
+                                                                 
+01  REPORT-HEADING-LINE         PIC X(44)                        
+            VALUE "             MY TEST REPORT                 ".
+                                                                 
+01  REPORT-HEADING-UNDERLINE.                                    
+    02  FILLER                  PIC X(12)  VALUE SPACES.         
+    02  FILLER                  PIC X(120) VALUE ALL "-".        
+                                                                 
+01  TOPIC-HEADING-LINE.                                          
+    02  FILLER                  PIC X(12) VALUE " COL1       ".  
+    02  FILLER                  PIC X(8)  VALUE SPACES.          
+    02  FILLER                  PIC X(10) VALUE "COL 2     ".    
+    02  FILLER                  PIC X(8)  VALUE "COL 3   ".      
+    02  FILLER                  PIC X(11) VALUE "COL 4      ".   
+    02  FILLER                  PIC X(11) VALUE "COL 5      ".   
+                                                                 
+01  REPORT-RULER         PIC X(132)                              
+     VALUE "123456789+123456789+123456789+123456789+1234".       
+                                                                 
+01  STANDARD-LINE.                                               
+    02  FILLER                   PIC X(10) VALUE '123456789+'.   
+    02  FILLER                   PIC X(10) VALUE '123456789+'.   
+    02  FILLER                   PIC X(10) VALUE '123456789+'.   
+    02  FILLER                   PIC X(10) VALUE '123456789+'.   
+    02  FILLER                   PIC X(10) VALUE '123456789+'.   
+    02  FILLER                   PIC X(10) VALUE '123456789+'.   
+    02  FILLER                   PIC X(10) VALUE '123456789+'.   
+    02  FILLER                   PIC X(10) VALUE '123456789+'.   
+    02  FILLER                   PIC X(10) VALUE '123456789+'.   
+    02  FILLER                   PIC X(10) VALUE '123456789+'.   
+    02  FILLER                   PIC X(10) VALUE '123456789+'.   
+    02  FILLER                   PIC X(10) VALUE '123456789+'.   
+    02  FILLER                   PIC X(10) VALUE '123456789+'.   
+    02  FILLER                   PIC X(2)  VALUE '12'.           
+                                                                 
+PROCEDURE DIVISION.                                              
+                                                                 
+01-MAIN.                                                         
+    OPEN OUTPUT REPORT01.                                        
+    WRITE PRINT-LINE FROM STANDARD-LINE                          
+          AFTER ADVANCING 1 LINE.                                
+    WRITE PRINT-LINE FROM REPORT-HEADING-LINE                    
+          AFTER ADVANCING 1 LINE.                                
+    WRITE PRINT-LINE FROM REPORT-HEADING-UNDERLINE               
+          AFTER ADVANCING 1 LINE.                                
+    WRITE PRINT-LINE FROM TOPIC-HEADING-LINE                     
+          AFTER ADVANCING 3 LINES.                               
+    WRITE PRINT-LINE FROM REPORT-RULER                           
+          AFTER ADVANCING 3 LINES.                               
+    CLOSE REPORT01.                                              
+    GOBACK.                                                      
+*> ------------------------------------------------------------------------------------------------------------------
+*> The source line number references in the following sections are either of
+*> the form <line-number> or <file-number>:<line-number>. The first form is
+*> used as an abbreviation for 0:<line-number>.
+*> The following is a key allowing the determination of the file name from
+*> the <file-number>.
+*>  
+*>          0: TEST13.cbl
+*>  
+*> ------------------------------------------------------------------------------------------------------------------
+*> DATA MAP KEY
+*>               Sec(Section) Fil = File Section                Type Flags: column O    ---> O = Occurs Item
+*>                            Wor = Working-Storage Section                 column R    ---> R = Redefines
+*>                            Loc = Local-Storage Section                   column X/G  ---> X = External
+*>                            Rep = Report Section                                           G = Global
+*>                            Lin = Linkage Section                         
+*> ------------------------------------------------------------------------------------------------------------------
+*> Data map for Program-Id: TEST13
+*> ------------------------------------------------------------------------------------------------------------------
+*>     Line    Name                                                  Size Offset      Sec Flags Data Type
+*>                                                                                        O R X
+*>                                                                                            G
+*> ------------------------------------------------------------------------------------------------------------------
+*>       16 01 PRINT-LINE                                             132             Fil       Display
+*>       21 01 REPORT-HEADING-LINE                                     44             Wor       Display
+*>       24 01 REPORT-HEADING-UNDERLINE                               132             Wor       Group
+*>       25   02 FILLER                                                12 (000000000)           Display
+*>       26   02 FILLER                                               120 (000000012)           Display
+*>       28 01 TOPIC-HEADING-LINE                                      60             Wor       Group
+*>       29   02 FILLER                                                12 (000000000)           Display
+*>       30   02 FILLER                                                 8 (000000012)           Display
+*>       31   02 FILLER                                                10 (000000020)           Display
+*>       32   02 FILLER                                                 8 (000000030)           Display
+*>       33   02 FILLER                                                11 (000000038)           Display
+*>       34   02 FILLER                                                11 (000000049)           Display
+*>       36 01 REPORT-RULER                                           132             Wor       Display
+*>       39 01 STANDARD-LINE                                          132             Wor       Group
+*>       40   02 FILLER                                                10 (000000000)           Display
+*>       41   02 FILLER                                                10 (000000010)           Display
+*>       42   02 FILLER                                                10 (000000020)           Display
+*>       43   02 FILLER                                                10 (000000030)           Display
+*>       44   02 FILLER                                                10 (000000040)           Display
+*>       45   02 FILLER                                                10 (000000050)           Display
+*>       46   02 FILLER                                                10 (000000060)           Display
+*>       47   02 FILLER                                                10 (000000070)           Display
+*>       48   02 FILLER                                                10 (000000080)           Display
+*>       49   02 FILLER                                                10 (000000090)           Display
+*>       50   02 FILLER                                                10 (000000100)           Display
+*>       51   02 FILLER                                                10 (000000110)           Display
+*>       52   02 FILLER                                                10 (000000120)           Display
+*>       53   02 FILLER                                                 2 (000000130)           Display
+*> ------------------------------------------------------------------------------------------------------------------
+*> --I: #14 Compiling TEST13.cbl
