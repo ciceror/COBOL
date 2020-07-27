@@ -1,0 +1,12 @@
+Rules for determining the size of a COMP-3 field (packed decimal)
+
+Stored as Binary Coded Decimal (BCD). 2 Digits per byte with sign in the low nybble of the least significant bytr, no matter if the picture clause has a sign otr not.
+Formula:
+  Bytes = (n + 1)/2 rounded up
+  
+  COMP-3:     Bytes:
+  S9(7)      4
+  S9(5)V99   4
+  S9(6)      4
+  9(7)       4
+  9(6)       4
