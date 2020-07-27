@@ -1,0 +1,66 @@
+COBOL Quick Reference
+
+0          1          2         3         4         5         6         7          8
+123456 7 8901 2345678901234567890123456789012345678901234567890123456789012 34567890
+###### @ AAAA BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB --------
+
+1-6    Sequence Number (ignored by compiler)
+7      Comment *,-,/,D
+8-11   Area A
+12-72  Area B
+73-80  Identity (ignored by compiler)
+
+Comments:
+#  Comment
+-  Continuation
+/  Printer control
+D  DEBUG
+
+  Program
+A     Division
+A         Section
+A             Paragraph
+B                Sentence
+B                    Statements
+
+Division:
+  IDENTIFICATION DIVISION
+  ENVIRONMENT DIVISION  (optional)
+  DATA DIVISION  (optional)
+  PROCEDURE DIVISION
+
+Statements:
+  Imperative
+  Conditional
+  Delimited scope
+  Compiler Directives
+
+IDENTIFICATION DIVISION
+    PROGRAM-ID. required 8 characters max.
+    AUTHOR. required.
+    INSTALLATION. optional.
+    DATE-WRITTEN. optional.
+    DATE-COMPILED. optional.
+    SECURITY. optional.
+
+
+ENVIRONMENT DIVISION. 
+    [Optional]	 [CONFIGURATION SECTION. 
+    [Optional]	 [SOURCE-COMPUTER. {source-computer-entry}]
+    [Optional]	 [OBJECT-COMPUTER. {object-computer-entry}]
+    [Optional]	 [SPECIAL-NAMES.   {special-names-entry}]]
+				
+    [Optional]	 [INPUT-OUTPUT SECTION.
+    [Optional]	 [FILE-CONTROL.    {file-control-entry}]
+    [Optional]	 [I-O-CONTROL.     {i-o-control-entry}]]	
+
+DATA DIVISION.
+    FILE SECTION
+    WORKING-STORAGE SECTION
+    LINKAGE SECTION
+
+PROCEDURE DIVISION.
+PROCEDURE DIVISION [USING {data-name-1}...].  (sub program)
+    DECLARITIVES.
+    END DECLARITIVES.
+PARAGRAPH.
