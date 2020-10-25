@@ -1,0 +1,2 @@
+OLD vCOBOL: vcc -po -sp=<opybook directpories> <cobol>.cob        Expand Copybooks (stick it in a <cobol>.list file
+new vCOBOL: vcprep -sp=<opybook directpories> <cobol>.cob
