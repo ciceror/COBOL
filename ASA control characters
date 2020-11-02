@@ -1,0 +1,6 @@
+vcobol.file.asa.adv:
+   true - (default) Print before output
+   false - Overlay first character
+vcobol.file.output:
+   asa
+   mcm
